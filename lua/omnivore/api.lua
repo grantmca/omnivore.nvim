@@ -32,12 +32,11 @@ function M.query_highlights()
   local gql_query =
   [[
     query Highlights {
-        highlights {
+        highlights(first: 50) {
             ... on HighlightsSuccess {
                 edges {
                     node {
                         annotation
-                        createdAt
                         createdByMe
                         id
                         html
@@ -47,7 +46,11 @@ function M.query_highlights()
                             originalArticleUrl
                             slug
                             pageType
+                            title
+                            url
                         }
+                        quote
+                        representation
                     }
                 }
             }
@@ -65,7 +68,7 @@ function M.query_libary_items()
   local gql_query =
   [[
     query Search {
-        search(first: 5) {
+        search(first: 100) {
             ... on SearchSuccess {
                 edges {
                     node {
