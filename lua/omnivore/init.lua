@@ -10,7 +10,7 @@ local log = require('plenary.log').new {
 }
 local M = {}
 
-M.show_libary_items = function (opts)
+M.show_notes = function (opts)
   pickers.new(opts, {
     finder = finders.new_table({
       results = api.query_highlights(),
@@ -43,10 +43,11 @@ M.show_libary_items = function (opts)
         }
 
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, formatted)
+        vim.api.nvim_buf_set_option(self.state.bufnr, 'wrap', true)
         utils.highlighter(self.state.bufnr, 'markdown')
       end,
     })
   }):find()
 end
 
-M.show_libary_items()
+M.show_notes()
