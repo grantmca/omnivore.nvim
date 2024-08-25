@@ -10,6 +10,27 @@ local log = require('plenary.log').new {
 }
 local M = {}
 
+M._format_preview = function (entry)
+  local annotation
+
+  if entry.value.annotation == vim.NIL then
+    annotation = ""
+  else
+    annotation = string.gsub(entry.value.annotation, "%s+", " ")
+  end
+  local description = string.gsub(entry.value.libraryItem.description or "", "%s+", " ")
+  local url = entry.value.libraryItem.url or ""
+
+  local formatted = {
+    '# Note: ' .. annotation,
+    '',
+    '*Libary Item Description*: ' .. description,
+    '*Item Url*: ' .. url,
+  }
+
+  return formatted
+end
+
 M.show_notes = function (opts)
   pickers.new(opts, {
     finder = finders.new_table({
@@ -26,24 +47,7 @@ M.show_notes = function (opts)
     previewer = previewers.new_buffer_previewer({
       title = "Omnivore Notes",
       define_preview = function(self, entry)
-        local annotation
-        if entry.value.annotation == vim.NIL then
-          annotation = "" 
-        else
-          annotation = string.gsub(entry.value.annotation, "%s+", " ")
-        end
-        local description = string.gsub(entry.value.libraryItem.description or "", "%s+", " ")
-        local url = entry.value.libraryItem.url or ""
-
-        local formatted = {
-          '# Note: ' .. annotation,
-          '',
-          '*Libary Item Description*: ' .. description,
-          '*Item Url*: ' .. url,
-        }
-
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, formatted)
-        vim.api.nvim_buf_set_option(self.state.bufnr, 'wrap', true)
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, M._format_preview(entry))
         utils.highlighter(self.state.bufnr, 'markdown')
       end,
     })

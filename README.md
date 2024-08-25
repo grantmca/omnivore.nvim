@@ -4,7 +4,7 @@
 
 The primary aim of this plugin is to seamlessly integrate notes and highlights into a notetaking workflow within Neovim. Here are the key objectives:
 
-- **Integration**: Easily import notes and highlights into Neovim.
+- **Integration**: Easily import notes and highlights from Omnivore into Neovim.
 - **Search Capability**: Sift through notes, select them, and automatically generate annotations along with references in your notes.
 - **Initial Implementation**: Currently, the plugin utilizes a simple `curl` command to interact with the corresponding API.
 - **Optimizations**: Future enhancements include caching notes locally and syncing them periodically to reduce API dependency.
