@@ -37,8 +37,6 @@ function M.query_highlights()
                 edges {
                     node {
                         annotation
-                        createdByMe
-                        id
                         html
                         libraryItem {
                             description
@@ -55,43 +53,6 @@ function M.query_highlights()
                 }
             }
             ... on HighlightsError {
-                errorCodes
-            }
-        }
-    }
-  ]]
-
-  return query_graphql(url, key, gql_query:gsub("%s+", " "))
-end
-
-function M.query_libary_items()
-  local gql_query =
-  [[
-    query Search {
-        search(first: 100) {
-            ... on SearchSuccess {
-                edges {
-                    node {
-                        content
-                        highlights {
-                            html
-                            quote
-                            type
-                            annotation
-                        }
-                        archivedAt
-                        folder
-                        url
-                        title
-                        slug
-                        readAt
-                    }
-                }
-                pageInfo {
-                    hasNextPage
-                }
-            }
-            ... on SearchError {
                 errorCodes
             }
         }
