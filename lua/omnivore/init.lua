@@ -1,39 +1,7 @@
-local api = require('omnivore.api')
-local pickers = require('telescope.pickers')
-local config = require('telescope.config').values
-local finders = require('telescope.finders')
-local previewers = require('telescope.previewers')
-local preview_formatter = require('omnivore.preview_formatter')
-local utils = require('telescope.previewers.utils')
-local log = require('plenary.log').new {
-    plugin = 'omnivore',
-    level = 'info',
-}
 local M = {}
 
-M.show_notes = function (opts)
-  pickers.new(opts, {
-    finder = finders.new_table({
-      results = api.query_highlights(),
-      entry_maker = function (entry)
-        return {
-          value = entry.node,
-          display = entry.node.libraryItem.title,
-          ordinal = entry.node.libraryItem.title
-        }
-      end,
-    }),
-    sorter = config.generic_sorter(opts),
-    previewer = previewers.new_buffer_previewer({
-      title = "Omnivore Notes",
-      define_preview = function(self, entry)
-        local width = vim.api.nvim_win_get_width(self.state.winid)
-        local out = preview_formatter.format(entry, width)
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, out)
-        utils.highlighter(self.state.bufnr, 'markdown')
-      end,
-    })
-  }):find()
+M.setup = function(config)
+    M.config = config
 end
 
-M.show_notes()
+return M

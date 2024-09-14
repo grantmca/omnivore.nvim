@@ -25,7 +25,7 @@ local function format_width(string, width)
   return output
 end
 
-function M.format(entry, width)
+function M.notes(entry, width)
   local annotation = entry.value.annotation ~= vim.NIL and string.gsub(entry.value.annotation, "%s+", " ") or ""
   local quote = entry.value.quote ~= vim.NIL and string.gsub(entry.value.quote, "%s+", " ") or ""
   local description = string.gsub(entry.value.libraryItem.description or "", "%s+", " ")
