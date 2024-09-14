@@ -47,11 +47,20 @@ M._format_width = function(input_string, width)
   return output
 end
 
+local function sanitize_and_strip(input)
+  if input ~= vim.NIL then
+    return string.gsub(input, "%s+", " ")
+  else
+    return ""
+  end
+end
+
 function M.notes(entry, width)
-  local annotation = entry.value.annotation ~= vim.NIL and string.gsub(entry.value.annotation, "%s+", " ") or ""
-  local quote = entry.value.quote ~= vim.NIL and string.gsub(entry.value.quote, "%s+", " ") or ""
-  local description = string.gsub(entry.value.libraryItem.description or "", "%s+", " ")
+  local annotation = sanitize_and_strip(entry.value.annotation)
+  local quote = sanitize_and_strip(entry.value.quote)
+  local description = sanitize_and_strip(entry.value.libraryItem.description or "")
   local url = entry.value.libraryItem.url or ""
+
   local formatted_annotation = M._format_width(annotation, width)
   local formatted_description = M._format_width(description, width)
   local formatted_quote = M._format_width(quote, width)
