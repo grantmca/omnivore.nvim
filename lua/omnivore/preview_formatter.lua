@@ -55,11 +55,10 @@ local function sanitize_and_strip(input)
   end
 end
 
-function M.notes(entry, width)
-  local annotation = sanitize_and_strip(entry.value.annotation)
-  local quote = sanitize_and_strip(entry.value.quote)
-  local description = sanitize_and_strip(entry.value.libraryItem.description or "")
-  local url = entry.value.libraryItem.url or ""
+function M.notes(annotation, quote, description, url, width)
+  annotation = sanitize_and_strip(annotation)
+  quote = sanitize_and_strip(quote)
+  description = sanitize_and_strip(description or "")
 
   local formatted_annotation = M._format_width(annotation, width)
   local formatted_description = M._format_width(description, width)

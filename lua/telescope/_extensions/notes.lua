@@ -4,7 +4,7 @@ local config = require('telescope.config').values
 local finders = require('telescope.finders')
 local previewers = require('telescope.previewers')
 local utils = require('telescope.previewers.utils')
-local preview_formatter = require('telescope._extensions.preview_formatter')
+local preview_formatter = require('omnivore.preview_formatter')
 
 local show_notes = function (opts)
   pickers.new(opts, {
@@ -23,7 +23,13 @@ local show_notes = function (opts)
       title = "Omnivore Notes",
       define_preview = function(self, entry)
         local width = vim.api.nvim_win_get_width(self.state.winid)
-        local out = preview_formatter.notes(entry, width)
+        local out = preview_formatter.notes(
+          entry.value.annotation,
+          entry.value.quote,
+          entry.value.libraryItem.description,
+          entry.value.libraryItem.url,
+          width
+        )
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, out)
         utils.highlighter(self.state.bufnr, 'markdown')
       end,

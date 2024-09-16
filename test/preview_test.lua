@@ -3,7 +3,7 @@ describe("Text Formatting Tests", function()
   local format_width
 
   before_each(function()
-    format_width = require('telescope._extensions.preview_formatter')._format_width
+    format_width = require('omnivore.preview_formatter')._format_width
   end)
 
   it("splits simple sentences correctly", function()
