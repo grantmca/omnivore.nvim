@@ -5,6 +5,8 @@ local finders = require('telescope.finders')
 local previewers = require('telescope.previewers')
 local utils = require('telescope.previewers.utils')
 local preview_formatter = require('omnivore.preview_formatter')
+local actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
 
 local show_notes = function (opts)
   pickers.new(opts, {
@@ -33,7 +35,16 @@ local show_notes = function (opts)
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, out)
         utils.highlighter(self.state.bufnr, 'markdown')
       end,
-    })
+    }),
+    attach_mappings = function(prompt_bufnr)
+      actions.select_default:replace(function()
+        local selection = action_state.get_selected_entry()
+        actions.close(prompt_bufnr)
+        print('selection: ')
+        print(vim.inspect(selection))
+      end)
+      return true
+    end,
   }):find()
 end
 
