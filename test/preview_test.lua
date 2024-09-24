@@ -1,4 +1,4 @@
-describe("Text Formatting Tests", function()
+describe("Preview Formatting Tests", function()
 
   local formatter
 

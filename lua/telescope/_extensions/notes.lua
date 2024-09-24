@@ -40,8 +40,10 @@ local show_notes = function (opts)
       actions.select_default:replace(function()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
-        print('selection: ')
-        print(vim.inspect(selection))
+        local note = selection.value.annotation
+        local quote = selection.value.quote
+        local url = selection.value.libraryItem.url
+        local title = selection.value.libraryItem.title
       end)
       return true
     end,
