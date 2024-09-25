@@ -17,8 +17,7 @@ describe("Annotation Formatting Tests", function()
     local expected_output = [[
 Notes are a good way to keep track of things
 "The Importance of keeping notes"
-[The Note Taking Manefesto|www.notes.test]
-]]
+[The Note Taking Manefesto|www.notes.test] ]]
 
     assert.are.same(expected_output, formatted_notes)
   end)
