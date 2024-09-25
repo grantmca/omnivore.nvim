@@ -5,6 +5,7 @@ local finders = require('telescope.finders')
 local previewers = require('telescope.previewers')
 local utils = require('telescope.previewers.utils')
 local preview_formatter = require('omnivore.preview_formatter')
+local annotation_formatter = require('omnivore.annotation_formatter')
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 
@@ -44,6 +45,8 @@ local show_notes = function (opts)
         local quote = selection.value.quote
         local url = selection.value.libraryItem.url
         local title = selection.value.libraryItem.title
+        local lines = vim.split(annotation_formatter.notes(note, quote, title, url), '\n')
+        vim.api.nvim_put(lines, "", false, true)
       end)
       return true
     end,
