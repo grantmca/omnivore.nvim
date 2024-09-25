@@ -1,8 +1,8 @@
 local M = {}
-local vim = vim
+local config = require('init').config
 
 local url = "https://api-prod.omnivore.app/api/graphql"
-local key = os.getenv('OMNIVORE_KEY')
+local key = config.api_token
 
 local function query_graphql(api_url, api_key, query)
   local output
