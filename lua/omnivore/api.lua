@@ -1,5 +1,5 @@
 local M = {}
-local config = require('init').config
+local config = require('omnivore').config
 
 local url = "https://api-prod.omnivore.app/api/graphql"
 local key = config.api_token
