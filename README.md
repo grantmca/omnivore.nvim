@@ -1,3 +1,6 @@
+#Deprecated
+- With the shutdown of Omnivore, and without a feasible option for self-hosting, I have decided to stop working on this project. I might consider forking it in the future if I am looking for a way to import notes taken on other devices into Neovim.
+
 ## Early WIP of Neovim Plugin for Taking Notes on Articles Stored in Omnivore
 
 ### Goal
